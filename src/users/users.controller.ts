@@ -19,6 +19,12 @@ export class UsersController {
     return this.usersService.login(loginUserDto)
   }
 
+  @Get('renew')
+  @UseGuards(AuthGuard())
+  renewToken(@GetUser() user: User){
+    return this.usersService.renewToken(user)
+  }
+
   @Get()
   findAll() {
     return this.usersService.findAll();

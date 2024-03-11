@@ -15,7 +15,7 @@ docker compose up -d
 ```
 Run the project:
 ```
-yarn start:dev
+pnpm start:dev
 ```
 
 ## To do

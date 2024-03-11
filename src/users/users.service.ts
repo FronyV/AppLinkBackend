@@ -50,7 +50,7 @@ export class UsersService {
     const { password, name } = loginUserDto
     const user = await this.userRepository.findOne({
       where: {name},
-      select: {name: true, password: true, userID: true}
+      select: {name: true, password: true, userID: true, perfilImage: true}
     })
 
     // if( !user )
@@ -70,6 +70,14 @@ export class UsersService {
   private getJwtToken( payload: JwtPayload ){
     const token = this.jwtService.sign( payload );
     return token
+  }
+
+  renewToken( user:User ){
+    const token = this.jwtService.sign({userID: user.userID})
+    return {
+      token,
+      user
+    }
   }
 
 
