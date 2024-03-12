@@ -32,7 +32,8 @@ export class UsersService {
       const {links = [], password, ...linkDetails } = createUserDto
       const user = this.userRepository.create({
         ...linkDetails,
-        password: bcrypt.hashSync(password, 10),
+        //password: bcrypt.hashSync(password, 10),
+        password: password,
         links: links.map( link => this.linkRepository.create({
           'image': link.image,
           'label': link.label,
@@ -41,7 +42,10 @@ export class UsersService {
       })
       await this.userRepository.save(user)
       delete user.password
-      return user
+      return {
+        ...user,
+        token: this.getJwtToken({userID: user.userID}),
+      }
     }
     catch (error){ this.handleDBExceptions(error) }
   }
