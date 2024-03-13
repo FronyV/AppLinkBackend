@@ -4,18 +4,20 @@ import { Link } from "src/links/entities"
 export class CreateUserDto {
 
     @IsString()
-    @IsNotEmpty()
+    @IsNotEmpty({
+        message: 'El usuario no puede ser vacío'
+    })
     name : string
 
     @IsString()
     perfilImage ?: string
     
     @IsString()
-    @MinLength(6)
+    // @MinLength(6)
     @MaxLength(50)
     @Matches(
         /(?:(?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
-        message: 'The password must have a Uppercase, lowercase letter and a number'
+        message: 'La contraseña debe tener almenos 1 mayúscula y 1 número'
     })
     password: string;
 
