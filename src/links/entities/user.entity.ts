@@ -22,11 +22,10 @@ export class User{
     })
     isActive: boolean;
 
-    @Column('set', {
-        enum: ['user', 'ghost', 'admin'],
-        default: ['user', 'ghost']
+    @Column('text', {
+        default: 'user'
     })
-    roles: string[]
+    roles: string
 
     @Column('varchar')
     perfilImage: string
