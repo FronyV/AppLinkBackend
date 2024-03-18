@@ -59,4 +59,11 @@ export class UsersController {
     return this.usersService.remove(id);
   }
 
+  @Get('ping')
+  ping(){
+    return {
+      res:"ponse"
+    }
+  }
+
 }
