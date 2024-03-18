@@ -6,7 +6,15 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.setGlobalPrefix('api')
-  app.enableCors();
+
+  const confCors = {
+    "origin": "https://app-link-frontend.vercel.app",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+    "optionsSuccessStatus": 204
+  }
+
+  app.enableCors(confCors);
 
   app.useGlobalPipes(
     new ValidationPipe({ 
